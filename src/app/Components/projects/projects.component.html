@@ -1,0 +1,59 @@
+<div class="container-fluid projects-section py-5">
+  <div class="container">
+
+    <!-- Heading -->
+    <div class="text-center mb-5">
+      <h2 class="projects-title">My Projects</h2>
+      <p class="projects-subtitle">
+        A selection of projects showcasing my skills and experience
+      </p>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="row g-4">
+
+      <div
+        class="col-12 col-md-6 col-lg-4"
+        *ngFor="let project of projects"
+      >
+        <div class="project-card h-100">
+
+          <div class="project-header">
+            <h5>{{ project.title }}</h5>
+            <span class="badge">{{ project.category }}</span>
+          </div>
+
+          <p class="project-desc">
+            {{ project.description }}
+          </p>
+
+          <div class="tech-stack">
+            <span *ngFor="let tech of project.technologies">
+              {{ tech }}
+            </span>
+          </div>
+
+          <div class="project-actions">
+            <a
+              *ngIf="project.liveUrl"
+              [href]="project.liveUrl"
+              target="_blank"
+            >
+              Live
+            </a>
+
+            <a
+              *ngIf="project.githubUrl"
+              [href]="project.githubUrl"
+              target="_blank"
+            >
+              Code →
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

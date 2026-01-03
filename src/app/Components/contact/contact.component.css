@@ -1,0 +1,205 @@
+/* CONTACT SECTION */
+.contact-section {
+  background-color: #000;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+    radial-gradient(1px 1px at 40px 70px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+    radial-gradient(1px 1px at 160px 30px, #fff, transparent),
+    radial-gradient(1px 1px at 200px 90px, #fff, transparent),
+    radial-gradient(1px 1px at 250px 50px, #fff, transparent),
+    radial-gradient(1px 1px at 280px 100px, #fff, transparent),
+    radial-gradient(1px 1px at 320px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 360px 80px, #fff, transparent),
+    radial-gradient(1px 1px at 420px 60px, #fff, transparent),
+    radial-gradient(1px 1px at 480px 95px, #fff, transparent),
+    radial-gradient(1px 1px at 540px 35px, #fff, transparent),
+    radial-gradient(1px 1px at 600px 75px, #fff, transparent),
+    radial-gradient(1px 1px at 650px 55px, #fff, transparent);
+  background-repeat: repeat;
+  background-size: 700px 150px;
+  opacity: 0.6;
+  animation: twinkle 4s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate, float 6s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  25% { opacity: 0.8; transform: scale(1.1); }
+  50% { opacity: 0.6; transform: scale(0.9); }
+  75% { opacity: 0.9; transform: scale(1.05); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-3px) scale(1.02); }
+}
+
+/* LEFT CARD */
+.contact-card {
+  background-color: #ffffff;
+  color: #000;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 30px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: rgba(198, 255, 64, 0.4) 0px 10px 30px;
+}
+
+.contact-card h3 {
+  color: #000;
+}
+
+/* INPUTS */
+.contact-card .form-control {
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+.contact-card .form-control:focus {
+  box-shadow: none;
+  border-color: #c6ff40;
+}
+
+/* BUTTON */
+.contact-btn {
+  background-color: #f56e38;
+  color: #fff;
+  border-radius: 30px;
+  padding: 12px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.contact-btn:hover {
+  background-color: #000;
+  color: #c6ff40;
+  transform: scale(1.05);
+}
+
+/* RIGHT CARD */
+.contact-info-card {
+  background: linear-gradient(135deg, #c6ff40, #a8e600);
+  color: #000;
+  border-radius: 25px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 30px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: rgba(198, 255, 64, 0.4) 0px 10px 30px;
+}
+
+.contact-info-card h4 {
+  font-size: 22px;
+}
+
+.contact-info-card p {
+  line-height: 1.6;
+}
+
+/* QUOTE */
+.quote {
+  border-top: 1px solid rgba(0,0,0,0.2);
+  padding-top: 15px;
+}
+
+
+.contact-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 2px #fff;
+  letter-spacing: 3px;
+}
+
+.contact-subtitle {
+  font-size: 14px;
+  color: #8c8182;
+}
+
+/* CONTACT DETAILS */
+.contact-details p {
+  font-size: 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-details i {
+  color: #000;
+  font-size: 16px;
+}
+
+/* SOCIAL ICONS */
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons a {
+  width: 40px;
+  height: 40px;
+  background-color: #000;
+  color: #c6ff40;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  background-color: #f56e38;
+  color: #fff;
+  transform: translateY(-5px) scale(1.1);
+}
+
+/* CARD ENTRANCE ANIMATION */
+.animate-card {
+  animation: slideUp 0.8s ease forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.social-icons a:nth-child(1) { animation-delay: 0.2s; }
+.social-icons a:nth-child(2) { animation-delay: 0.4s; }
+.social-icons a:nth-child(3) { animation-delay: 0.6s; }

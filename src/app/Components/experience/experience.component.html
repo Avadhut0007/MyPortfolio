@@ -1,0 +1,46 @@
+<div class="container-fluid experience-section py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="experience-title">Experience</h2>
+      <p class="experience-subtitle">
+        My professional journey and hands-on industry experience
+      </p>
+    </div>
+
+    <div class="timeline">
+      <div
+        class="timeline-item"
+        *ngFor="let exp of experiences; let i = index"
+        [class.left]="i % 2 === 0"
+        [class.right]="i % 2 !== 0"
+      >
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-content">
+          <h5>{{ exp.role }}</h5>
+          <p class="company">
+            {{ exp.company }}
+            <span class="location">· {{ exp.location }}</span>
+          </p>
+
+          <span class="duration">
+            <i class="fa-regular fa-calendar"></i>
+            {{ exp.duration }}
+          </span>
+
+          <ul>
+            <li *ngFor="let point of exp.description">
+              {{ point }}
+            </li>
+          </ul>
+
+          <div class="tech-stack">
+            <span *ngFor="let tech of exp.technologies">
+              {{ tech }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container-fluid skills-section py-5">
+  <div class="container">
+
+    <div class="text-center mb-5">
+      <h2 class="skills-title">Skills</h2>
+      <p class="skills-subtitle">
+        Technologies I work with and continuously improve
+      </p>
+    </div>
+
+    <div class="skills-grid">
+
+      <div
+        class="skill-card"
+        *ngFor="let skill of skills"
+      >
+        <img
+          [src]="skill.icon"
+          [alt]="skill.name"
+        />
+
+        <h6>{{ skill.name }}</h6>
+
+        <!-- TOOLTIP -->
+        <div class="tooltip">
+          <strong>{{ skill.level }}</strong>
+          <p>{{ skill.description }}</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

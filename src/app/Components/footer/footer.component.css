@@ -1,0 +1,140 @@
+.portfolio-footer {
+  background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+  color: #fff;
+  padding: 60px 0 20px;
+}
+
+/* TEXT */
+.footer-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: #f3efef;
+}
+
+.footer-role {
+  font-size: 14px;
+  color: #f56e38;
+  margin-bottom: 10px;
+}
+
+.footer-desc {
+  font-size: 14px;
+  color: #aaa;
+  line-height: 1.6;
+}
+
+/* TITLES */
+.footer-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* LINKS */
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #ccc;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #c6ff40;
+  padding-left: 5px;
+}
+
+/* SOCIAL ICONS */
+.footer-socials {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-socials a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #111;
+  color: #c6ff40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease;
+}
+
+.footer-socials a:hover {
+  background-color: #f56e38;
+  color: #fff;
+  transform: translateY(-5px);
+}
+
+/* DIVIDER */
+.footer-divider {
+  border-color: #222;
+  margin: 30px 0 15px;
+}
+
+/* BOTTOM */
+.footer-bottom p {
+  font-size: 13px;
+  color: #777;
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background-color: #c6ff40;
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  transition: 0.3s ease;
+  z-index: 999;
+}
+
+.scroll-top:hover {
+  background-color: #f56e38;
+  color: #fff;
+  transform: translateY(-5px);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.resume-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 8px 18px;
+  border-radius: 30px;
+  background-color: #f56e38;
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.resume-btn:hover {
+  background-color: #c6ff40;
+  color: #000;
+}
