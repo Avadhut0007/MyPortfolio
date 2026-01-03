@@ -3,9 +3,9 @@ import { Experience } from './experience.model';
 export const EXPERIENCE_DATA: Experience[] = [
   {
     id: 1,
-    role: 'Java Full-Stack Developer Intern',
+    role: 'Java Full-Stack Developer Trainee',
     company: 'CARE Analytics and Advisory Pvt. Ltd.',
-    duration: 'Mar 2024 – Oct 2024',
+    duration: 'Jan 2026 – Present',
     location: 'India',
     description: [
       'Worked on enterprise-level web applications using Java and Angular.',
@@ -16,9 +16,9 @@ export const EXPERIENCE_DATA: Experience[] = [
   },
   {
     id: 2,
-    role: '.NET Intern',
-    company: 'Confidential / Client Project',
-    duration: 'Nov 2024 – Present',
+    role: 'Software Developement Intern',
+    company: 'SpidronTech LLP',
+    duration: 'Mar 2025 – Oct 2025',
     location: 'India',
     description: [
       'Built Web APIs using ASP.NET Core.',

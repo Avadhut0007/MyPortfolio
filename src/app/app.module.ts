@@ -13,6 +13,8 @@ import { StarfieldComponent } from './shared/starfield/starfield.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { AboutComponent } from './Components/about/about.component';
 import { SkillsComponent } from './Components/skills/skills.component';
+import { CertificationsComponent } from './Components/certifications/certifications.component';
+import { TestimonialsComponent } from './Components/testimonials/testimonials.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { SkillsComponent } from './Components/skills/skills.component';
     StarfieldComponent,
     FooterComponent,
     AboutComponent,
-    SkillsComponent
+    SkillsComponent,
+    CertificationsComponent,
+    TestimonialsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,43 @@
+<div class="container-fluid certifications-section py-5" id="certifications">
+  <div class="container">
+
+    <!-- SECTION TITLE -->
+    <div class="text-center mb-5">
+      <h2 class="certifications-title">Certifications</h2>
+      <p class="certifications-subtitle">
+        Professional certifications that validate my expertise and commitment to excellence
+      </p>
+    </div>
+
+    <!-- CERTIFICATIONS GRID -->
+    <div class="row g-4">
+      <div
+        class="col-12 col-md-6 col-lg-4"
+        *ngFor="let cert of certifications"
+      >
+        <div class="certification-card h-100">
+
+          <div class="cert-icon" [ngClass]="getIssuerClass(cert.issuer)">
+            <i class="fa-solid fa-certificate"></i>
+          </div>
+
+          <h5 class="cert-name">{{ cert.name }}</h5>
+          <p class="cert-issuer">{{ cert.issuer }}</p>
+          <span class="cert-date">{{ cert.date }}</span>
+
+          <div class="cert-details" *ngIf="cert.credentialId">
+            <small>Credential ID: {{ cert.credentialId }}</small>
+          </div>
+
+          <div class="cert-link" *ngIf="cert.link">
+            <a [href]="cert.link" target="_blank" rel="noopener noreferrer">
+              View Certificate
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

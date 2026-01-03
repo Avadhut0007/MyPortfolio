@@ -1,0 +1,41 @@
+<div class="container-fluid testimonials-section py-5" id="testimonials">
+  <div class="container">
+
+    <!-- SECTION TITLE -->
+    <div class="text-center mb-5">
+      <h2 class="testimonials-title">Testimonials</h2>
+      <p class="testimonials-subtitle">
+        What clients and colleagues say about working with me
+      </p>
+    </div>
+
+    <!-- TESTIMONIALS CAROUSEL -->
+    <div class="testimonials-carousel">
+      <div class="testimonial-item" *ngFor="let testimonial of testimonials">
+        <div class="testimonial-card">
+
+          <div class="quote-icon">
+            <i class="fa-solid fa-quote-left"></i>
+          </div>
+
+          <p class="testimonial-quote">{{ testimonial.quote }}</p>
+
+          <div class="testimonial-author">
+            <img
+              *ngIf="testimonial.image"
+              [src]="testimonial.image"
+              [alt]="testimonial.author"
+              class="author-image"
+            />
+            <div class="author-info">
+              <h6>{{ testimonial.author }}</h6>
+              <p>{{ testimonial.position }}, {{ testimonial.company }}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
