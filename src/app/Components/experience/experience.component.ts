@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Experience } from '../../models/experience.model';
 import { ExperienceService } from '../../services/experience.service';
 
@@ -19,4 +19,16 @@ export class ExperienceComponent implements OnInit {
     });
   }
 
+  @HostListener('window:scroll')
+    revealFooter() {
+      const footer = document.querySelector('.reveal5');
+      if (!footer) return;
+  
+      const windowHeight = window.innerHeight;
+      const elementTop = footer.getBoundingClientRect().top;
+  
+      if (elementTop < windowHeight - 100) {
+        footer.classList.add('active');
+      }
+    }
 }

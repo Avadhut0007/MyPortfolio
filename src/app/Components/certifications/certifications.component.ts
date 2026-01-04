@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CERTIFICATES_DATA, Certification } from './certifications.data';
 
 @Component({
@@ -16,4 +16,17 @@ export class CertificationsComponent {
     if (issuerLower.includes('edubridge')) return 'edubridge';
     return '';
   }
+
+  @HostListener('window:scroll')
+      revealFooter() {
+        const footer = document.querySelector('.reveal2');
+        if (!footer) return;
+    
+        const windowHeight = window.innerHeight;
+        const elementTop = footer.getBoundingClientRect().top;
+    
+        if (elementTop < windowHeight - 100) {
+          footer.classList.add('active');
+        }
+      }
 }

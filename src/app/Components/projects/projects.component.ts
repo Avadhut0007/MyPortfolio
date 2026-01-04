@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ProjectsService } from '../../services/projects.service';
 
 
@@ -27,4 +27,17 @@ export class ProjectsComponent implements OnInit {
       }
     });
   }
+
+  @HostListener('window:scroll')
+    revealFooter() {
+      const footer = document.querySelector('.reveal3');
+      if (!footer) return;
+  
+      const windowHeight = window.innerHeight;
+      const elementTop = footer.getBoundingClientRect().top;
+  
+      if (elementTop < windowHeight - 100) {
+        footer.classList.add('active');
+      }
+    }
 }

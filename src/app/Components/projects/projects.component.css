@@ -136,3 +136,14 @@
 .project-actions a:hover {
   color: #c6ff40;
 }
+
+.reveal3 {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease;
+}
+
+.reveal3.active {
+  opacity: 1;
+  transform: translateY(0);
+}
