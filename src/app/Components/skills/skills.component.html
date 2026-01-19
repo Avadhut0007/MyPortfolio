@@ -1,6 +1,5 @@
 <div class="container-fluid skills-section py-5">
   <div class="container">
-
     <div class="text-center mb-5">
       <h2 class="skills-title">Skills</h2>
       <p class="skills-subtitle">
@@ -9,27 +8,21 @@
     </div>
 
     <div class="skills-grid">
-
-      <div
-        class="skill-card"
-        *ngFor="let skill of skills"
-      >
-        <img
-          [src]="skill.icon"
-          [alt]="skill.name"
-        />
+      <div class="skill-card" *ngFor="let skill of skills">
+        <div class="icon-wrapper">
+          <img [src]="skill.icon" [alt]="skill.name" />
+        </div>
 
         <h6>{{ skill.name }}</h6>
+
+        <span class="skill-level">{{ skill.level }}</span>
 
         <!-- TOOLTIP -->
         <div class="tooltip">
           <strong>{{ skill.level }}</strong>
           <p>{{ skill.description }}</p>
         </div>
-
       </div>
-
     </div>
-
   </div>
 </div>

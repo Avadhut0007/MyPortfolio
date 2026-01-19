@@ -1,3 +1,4 @@
+/* ================= SKILLS SECTION ================= */
 .skills-section {
   background-color: #000;
   color: #fff;
@@ -5,13 +6,11 @@
   overflow: hidden;
 }
 
+/* Background stars animation */
 .skills-section::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-image:
     radial-gradient(1px 1px at 30px 50px, #fff, transparent),
     radial-gradient(1px 1px at 80px 30px, #fff, transparent),
@@ -21,34 +20,24 @@
     radial-gradient(1px 1px at 320px 30px, #fff, transparent),
     radial-gradient(1px 1px at 380px 60px, #fff, transparent),
     radial-gradient(1px 1px at 440px 90px, #fff, transparent),
-    radial-gradient(1px 1px at 500px 50px, #fff, transparent),
-    radial-gradient(1px 1px at 560px 70px, #fff, transparent),
-    radial-gradient(1px 1px at 620px 35px, #fff, transparent),
-    radial-gradient(1px 1px at 680px 85px, #fff, transparent),
-    radial-gradient(1px 1px at 740px 45px, #fff, transparent);
-  background-repeat: repeat;
+    radial-gradient(1px 1px at 500px 50px, #fff, transparent);
   background-size: 800px 120px;
   opacity: 0.6;
-  animation: twinkle 3s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite alternate, float 5s ease-in-out infinite;
+  animation: twinkle 3s infinite alternate, float 5s ease-in-out infinite;
 }
 
+/* Animations */
 @keyframes twinkle {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  15% { opacity: 0.8; transform: scale(1.15); }
-  30% { opacity: 0.5; transform: scale(0.85); }
-  45% { opacity: 0.9; transform: scale(1.08); }
-  60% { opacity: 0.6; transform: scale(0.92); }
-  75% { opacity: 0.85; transform: scale(1.12); }
-  90% { opacity: 0.7; transform: scale(0.98); }
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  25% { transform: translateY(-1px) scale(1.005); }
-  50% { transform: translateY(-3px) scale(1.01); }
-  75% { transform: translateY(1px) scale(0.995); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 }
 
+/* ================= TITLE ================= */
 .skills-title {
   font-size: 36px;
   font-weight: 700;
@@ -62,49 +51,86 @@
   color: #8c8182;
 }
 
-/* GRID */
+/* ================= GRID ================= */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 25px;
 }
 
-/* CARD */
+/* ================= SKILL CARD ================= */
 .skill-card {
   position: relative;
-  background-color: #111;
-  border-radius: 20px;
-  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 22px;
+  padding: 22px 18px;
   text-align: center;
   cursor: pointer;
-  transition: 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.35s ease;
+}
+
+/* Gradient border on hover */
+.skill-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  padding: 1px;
+  background: linear-gradient(135deg, #c6ff40, transparent, #c6ff40);
+  opacity: 0;
+  transition: 0.4s ease;
+}
+
+.skill-card:hover::before {
+  opacity: 1;
 }
 
 .skill-card:hover {
-  transform: translateY(-8px);
-  box-shadow: rgba(198, 255, 64, 0.4) 0px 15px 40px;
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 45px rgba(198, 255, 64, 0.35);
 }
 
-/* ICON */
-.skill-card img {
-  width: 50px;
-  height: 50px;
+/* ================= ICON ================= */
+.icon-wrapper {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: rgba(198, 255, 64, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-wrapper img {
+  width: 38px;
+  height: 38px;
   object-fit: contain;
-  margin-bottom: 10px;
 }
 
-/* NAME */
+/* ================= TEXT ================= */
 .skill-card h6 {
   font-size: 14px;
-  margin-top: 5px;
+  font-weight: 600;
+  margin-bottom: 4px;
 }
 
-/* TOOLTIP */
+.skill-level {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(198, 255, 64, 0.15);
+  color: #c6ff40;
+}
+
+/* ================= TOOLTIP ================= */
 .tooltip {
   position: absolute;
-  bottom: 110%;
+  bottom: 120%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(10px);
   width: 200px;
   background-color: #111;
   border: 1px solid #c6ff40;
@@ -124,9 +150,10 @@
 .skill-card:hover .tooltip {
   opacity: 1;
   visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
-/* MOBILE */
+/* ================= MOBILE ================= */
 @media (max-width: 768px) {
   .tooltip {
     display: none;
