@@ -27,11 +27,18 @@ export class StarfieldComponent implements AfterViewInit {
   isTablet = false;
 
   ngAfterViewInit() {
-    this.detectDeviceType();
-    this.initCanvas();
-    this.createStars();
-    this.animate();
-    this.startShootingStars();
+    // Ensure canvas is rendered before accessing it
+    setTimeout(() => {
+      try {
+        this.detectDeviceType();
+        this.initCanvas();
+        this.createStars();
+        this.animate();
+        this.startShootingStars();
+      } catch (error) {
+        console.error('Starfield initialization error:', error);
+      }
+    }, 0);
   }
 
   /**
@@ -54,10 +61,25 @@ export class StarfieldComponent implements AfterViewInit {
   }
 
   initCanvas() {
-    const canvas = this.canvasRef.nativeElement;
-    this.ctx = canvas.getContext('2d')!;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    try {
+      const canvas = this.canvasRef?.nativeElement;
+      if (!canvas) {
+        console.warn('Canvas element not found');
+        return;
+      }
+      
+      const context = canvas.getContext('2d', { willReadFrequently: false });
+      if (!context) {
+        console.error('Could not get canvas 2D context');
+        return;
+      }
+      
+      this.ctx = context;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    } catch (error) {
+      console.error('Canvas initialization error:', error);
+    }
   }
 
   createStars() {
@@ -83,13 +105,23 @@ export class StarfieldComponent implements AfterViewInit {
   }
 
   animate = () => {
-    const canvas = this.canvasRef.nativeElement;
-    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    try {
+      const canvas = this.canvasRef?.nativeElement;
+      if (!canvas || !this.ctx) {
+        requestAnimationFrame(this.animate);
+        return;
+      }
 
-    this.drawStars();
-    this.drawShootingStars();
+      this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    requestAnimationFrame(this.animate);
+      this.drawStars();
+      this.drawShootingStars();
+
+      requestAnimationFrame(this.animate);
+    } catch (error) {
+      console.error('Animation error:', error);
+      requestAnimationFrame(this.animate);
+    }
   };
 
   drawStars() {
