@@ -7,20 +7,30 @@
       </p>
     </div>
 
-    <div class="skills-grid">
-      <div class="skill-card" *ngFor="let skill of skills">
-        <div class="icon-wrapper">
-          <img [src]="skill.icon" [alt]="skill.name" />
+    <!-- Skills by Category -->
+    <div class="skills-container">
+      <div class="category-section" *ngFor="let category of skillCategories">
+        <div class="category-header">
+          <h3 class="category-title">{{ category.name }}</h3>
+          <div class="category-divider"></div>
         </div>
 
-        <h6>{{ skill.name }}</h6>
+        <div class="skills-grid">
+          <div class="skill-card" *ngFor="let skill of category.skills">
+            <div class="icon-wrapper">
+              <img [src]="skill.icon" [alt]="skill.name" />
+            </div>
 
-        <span class="skill-level">{{ skill.level }}</span>
+            <h6>{{ skill.name }}</h6>
 
-        <!-- TOOLTIP -->
-        <div class="tooltip">
-          <strong>{{ skill.level }}</strong>
-          <p>{{ skill.description }}</p>
+            <span class="skill-level">{{ skill.level }}</span>
+
+            <!-- TOOLTIP -->
+            <div class="tooltip">
+              <strong>{{ skill.level }}</strong>
+              <p>{{ skill.description }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

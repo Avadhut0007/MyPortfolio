@@ -4,4 +4,5 @@ export interface Skill {
   icon: string;
   level: string;
   description: string;
+  category: string;
 }

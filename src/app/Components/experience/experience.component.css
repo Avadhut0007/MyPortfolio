@@ -225,13 +225,22 @@
   padding-left: 20px;
 }
 
+@keyframes smoothReveal5 {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .reveal5 {
   opacity: 0;
-  transform: translateY(40px);
-  transition: 0.8s ease;
+  transform: translateY(30px) scale(0.98);
 }
 
 .reveal5.active {
-  opacity: 1;
-  transform: translateY(0);
+  animation: smoothReveal5 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
