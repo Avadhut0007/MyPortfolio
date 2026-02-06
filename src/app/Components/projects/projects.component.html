@@ -18,26 +18,55 @@
       >
         <div class="project-card h-100">
 
+          <!-- Header with title and badge -->
           <div class="project-header">
             <h5>{{ project.title }}</h5>
             <span class="badge">{{ project.category }}</span>
           </div>
 
+          <!-- Description -->
           <p class="project-desc">
             {{ project.description }}
           </p>
 
+          <!-- Role (if available) -->
+          <div class="project-role" *ngIf="project.role">
+            <small class="text-role">
+              <strong>Role:</strong> {{ project.role }}
+            </small>
+          </div>
+
+          <!-- Key Features (if available) -->
+          <div class="project-features" *ngIf="project.keyFeatures && project.keyFeatures.length > 0">
+            <div class="features-label">Key Features:</div>
+            <ul class="features-list">
+              <li *ngFor="let feature of project.keyFeatures | slice:0:2">
+                {{ feature }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Tech Stack -->
           <div class="tech-stack">
             <span *ngFor="let tech of project.technologies">
               {{ tech }}
             </span>
           </div>
 
+          <!-- Outcome (if available) -->
+          <div class="project-outcome" *ngIf="project.outcome">
+            <small class="text-outcome">
+              <strong>Outcome:</strong> {{ project.outcome }}
+            </small>
+          </div>
+
+          <!-- Actions -->
           <div class="project-actions">
             <a
               *ngIf="project.liveUrl"
               [href]="project.liveUrl"
               target="_blank"
+              class="action-link"
             >
               Live
             </a>
@@ -46,6 +75,7 @@
               *ngIf="project.githubUrl"
               [href]="project.githubUrl"
               target="_blank"
+              class="action-link"
             >
               Code →
             </a>

@@ -210,7 +210,8 @@
   }
 
   .timeline-dot {
-    left: 0;
+    left: 0 !important;
+    top: 30px;
   }
 }
 

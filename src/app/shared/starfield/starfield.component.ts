@@ -20,14 +20,37 @@ export class StarfieldComponent implements AfterViewInit {
   mouseX = 0;
   mouseY = 0;
 
+  // Responsive configuration based on device
   STAR_COUNT = 200;
   SHOOTING_INTERVAL = 3000; // every 3 seconds
+  isMobile = false;
+  isTablet = false;
 
   ngAfterViewInit() {
+    this.detectDeviceType();
     this.initCanvas();
     this.createStars();
     this.animate();
     this.startShootingStars();
+  }
+
+  /**
+   * Detect device type and adjust animation settings
+   * Mobile devices get reduced animation intensity for better performance
+   */
+  detectDeviceType() {
+    const width = window.innerWidth;
+    this.isMobile = width < 768;
+    this.isTablet = width >= 768 && width < 1024;
+    
+    // Reduce star count and shooting star frequency on mobile for performance
+    if (this.isMobile) {
+      this.STAR_COUNT = 80; // Reduced from 200
+      this.SHOOTING_INTERVAL = 5000; // Increased interval (less frequent)
+    } else if (this.isTablet) {
+      this.STAR_COUNT = 120; // Medium count
+      this.SHOOTING_INTERVAL = 4000;
+    }
   }
 
   initCanvas() {
@@ -45,7 +68,11 @@ export class StarfieldComponent implements AfterViewInit {
         y: Math.random() * window.innerHeight,
         radius: Math.random() * 1.5 + 0.5,
         speed: Math.random() * 0.3 + 0.1,
-        color: this.getStarColor()
+        color: this.getStarColor(),
+        // Reduced twinkle amplitude on mobile devices
+        twinkleSpeed: this.isMobile ? 0.01 : 0.02,
+        baseOpacity: 0.5 + Math.random() * 0.5,
+        opacity: 0.5 + Math.random() * 0.5
       });
     }
   }
@@ -67,17 +94,24 @@ export class StarfieldComponent implements AfterViewInit {
 
   drawStars() {
     this.stars.forEach(star => {
-      // mouse parallax
-      const dx = (this.mouseX - window.innerWidth / 2) * 0.0005;
-      const dy = (this.mouseY - window.innerHeight / 2) * 0.0005;
+      // Reduced parallax effect on mobile for performance
+      const parallaxFactor = this.isMobile ? 0.0002 : 0.0005;
+      const dx = (this.mouseX - window.innerWidth / 2) * parallaxFactor;
+      const dy = (this.mouseY - window.innerHeight / 2) * parallaxFactor;
 
       star.y += star.speed;
       if (star.y > window.innerHeight) star.y = 0;
 
+      // Subtle twinkling effect (reduced on mobile)
+      star.opacity += (Math.random() - 0.5) * star.twinkleSpeed;
+      star.opacity = Math.max(star.baseOpacity * 0.5, Math.min(star.baseOpacity, star.opacity));
+
       this.ctx.beginPath();
       this.ctx.arc(star.x + dx * 50, star.y + dy * 50, star.radius, 0, Math.PI * 2);
       this.ctx.fillStyle = star.color;
+      this.ctx.globalAlpha = star.opacity;
       this.ctx.fill();
+      this.ctx.globalAlpha = 1;
     });
   }
 
@@ -86,10 +120,10 @@ export class StarfieldComponent implements AfterViewInit {
       this.shootingStars.push({
         x: Math.random() * window.innerWidth,
         y: 0,
-        vx: -6, // velocity x (moving left)
-        vy: 6,  // velocity y (moving down)
+        vx: -6,
+        vy: 6,
         length: 60,
-        life: 80, // frames to live
+        life: 80,
         opacity: 1
       });
     }, this.SHOOTING_INTERVAL);
@@ -128,12 +162,16 @@ export class StarfieldComponent implements AfterViewInit {
 
   @HostListener('mousemove', ['$event'])
   onMouseMove(e: MouseEvent) {
-    this.mouseX = e.clientX;
-    this.mouseY = e.clientY;
+    // Disable parallax on mobile for performance
+    if (!this.isMobile) {
+      this.mouseX = e.clientX;
+      this.mouseY = e.clientY;
+    }
   }
 
   @HostListener('window:resize')
   onResize() {
+    this.detectDeviceType();
     this.initCanvas();
     this.createStars();
     this.shootingStars = []; // Clear shooting stars on resize

@@ -3,4 +3,23 @@ canvas {
   inset: 0;
   z-index: -1;
   pointer-events: none;
+  /* Optimized rendering for smooth performance */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Mobile Optimization - Reduce rendering intensity */
+@media (max-width: 768px) {
+  canvas {
+    /* Hint browser to use GPU acceleration */
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Tablet Optimization */
+@media (min-width: 769px) and (max-width: 1024px) {
+  canvas {
+    transform: translate3d(0, 0, 0);
+  }
 }

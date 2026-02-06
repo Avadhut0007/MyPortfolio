@@ -4,37 +4,67 @@
     <div
       class="col-12 col-md-4 d-flex flex-column align-items-center text-center mb-4"
     >
-      <div class="info bg-white text-dark p-3 rounded shadow">
-        <div class="image mb-3">
-          <img src="assets/pic.jpg" alt="" class="img-fluid rounded shadow" />
+      <!-- Profile Card with Enhanced Design -->
+      <div class="info bg-white text-dark p-3 rounded shadow profile-card">
+        <!-- Badge Section -->
+        <div class="profile-badge">
+          <span class="badge-text">✨ Available</span>
         </div>
+
+        <!-- Profile Image with Animation -->
+        <div class="image mb-3 image-container">
+          <div class="image-glow"></div>
+          <img src="assets/AI_Generated_Pic.png" alt="Avadhut Patil" class="img-fluid rounded shadow profile-image" />
+          <div class="image-shine"></div>
+        </div>
+
+        <!-- Name Section -->
         <div class="name mb-2">
-          <p class="h4 fw-bold">Avadhut Patil</p>
+          <p class="h4 fw-bold name-text">Avadhut Patil</p>
+          <div class="name-underline"></div>
         </div>
-        <div class="degisnation mb-2">
-          <p class="small fw-medium">Java Full-Stack Developer</p>
+
+        <!-- Designation with Badge -->
+        <div class="degisnation mb-3">
+          <p class="small fw-medium designation-badge">
+            <i class="fa-solid fa-code"></i>
+            Java Full-Stack Developer
+          </p>
         </div>
-        <div class="summery">
-          <p class="small">
+
+        <!-- Summary -->
+        <div class="summery mb-4">
+          <p class="small summary-text">
             A passionate Java Full Stack Developer with expertise in building
             robust web applications and a flair for solving complex problems.
           </p>
         </div>
-      </div>
 
-      <div
-        class="get-in-touch d-flex align-items-center justify-content-center mt-4 rounded-pill bg-secondary text-white p-2"
-        style="cursor: pointer"
-      >
-        <a class="m-0 text-white text-decoration-none" href="#contact">Get In Touch</a>
-        <div
-          class="circle ms-2 bg-warning rounded-circle d-flex align-items-center justify-content-center"
-          style="width: 45px; height: 45px"
-        >
-        →
-          <!-- <i class="fas fa-arrow-right"></i> -->
+        <!-- Stats Section -->
+        <div class="profile-stats">
+          <div class="stat-item">
+            <p class="stat-number">4+</p>
+            <p class="stat-label">Years</p>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <p class="stat-number">10+</p>
+            <p class="stat-label">Projects</p>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <p class="stat-number">5+</p>
+            <p class="stat-label">Certifications</p>
+          </div>
         </div>
       </div>
+
+      <a href="#contact" class="get-in-touch mt-5">
+        <span class="btn-text">Get In Touch</span>
+        <div class="arrow-badge">
+          →
+        </div>
+      </a>
     </div>
 
     <div class="col-12 col-md-8 d-flex flex-column align-items-center">

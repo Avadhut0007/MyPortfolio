@@ -17,20 +17,63 @@
       >
         <div class="certification-card h-100">
 
-          <div class="cert-icon" [ngClass]="getIssuerClass(cert.issuer)">
+          <!-- Certificate Image with Hover Overlay -->
+          <div class="cert-image-wrapper" *ngIf="cert.certificateImage">
+            <img 
+              [src]="cert.certificateImage" 
+              [alt]="cert.name"
+              class="cert-image"
+            />
+            <div class="cert-image-overlay">
+              <button 
+                class="view-cert-btn"
+                (click)="viewCertificate(cert)"
+                title="Click to view full certificate"
+              >
+                <i class="fa-solid fa-expand"></i>
+                <span>View Certificate</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Certificate Icon (fallback) -->
+          <div class="cert-icon" *ngIf="!cert.certificateImage" [ngClass]="getIssuerClass(cert.issuer)">
             <i class="fa-solid fa-certificate"></i>
           </div>
 
-          <h5 class="cert-name">{{ cert.name }}</h5>
-          <p class="cert-issuer">{{ cert.issuer }}</p>
-          <span class="cert-date">{{ cert.date }}</span>
+          <!-- Certificate Info -->
+          <div class="cert-content">
+            <h5 class="cert-name">{{ cert.name }}</h5>
+            <p class="cert-issuer">{{ cert.issuer }}</p>
+            <span class="cert-date">
+              <i class="fa-solid fa-calendar-days"></i>
+              {{ cert.date }}
+            </span>
 
-          <div class="cert-details" *ngIf="cert.credentialId">
-            <small>Credential ID: {{ cert.credentialId }}</small>
+            <!-- Description -->
+            <p class="cert-description" *ngIf="cert.description">
+              {{ cert.description }}
+            </p>
+
+            <!-- Credential ID -->
+            <div class="cert-details" *ngIf="cert.credentialId">
+              <small class="credential-id">
+                <i class="fa-solid fa-fingerprint"></i>
+                {{ cert.credentialId }}
+              </small>
+            </div>
           </div>
 
-          <div class="cert-link" *ngIf="cert.link">
-            <a [href]="cert.link" target="_blank" rel="noopener noreferrer">
+          <!-- Certificate Link -->
+          <div class="cert-actions">
+            <a 
+              [href]="cert.certificateLink" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="cert-link-btn"
+              *ngIf="cert.certificateLink"
+            >
+              <i class="fa-solid fa-external-link"></i>
               View Certificate
             </a>
           </div>
@@ -39,5 +82,32 @@
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- Certificate Modal -->
+<div class="cert-modal" *ngIf="selectedCertificate" (click)="closeCertificateModal()">
+  <div class="cert-modal-content" (click)="$event.stopPropagation()">
+    <button class="cert-modal-close" (click)="closeCertificateModal()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <img 
+      [src]="selectedCertificate.certificateImage" 
+      [alt]="selectedCertificate.name"
+      class="cert-modal-image"
+    />
+    <div class="cert-modal-info">
+      <h3>{{ selectedCertificate.name }}</h3>
+      <p>{{ selectedCertificate.issuer }}</p>
+      <a 
+        [href]="selectedCertificate.certificateLink" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="modal-cert-btn"
+      >
+        <i class="fa-solid fa-external-link"></i>
+        Open Full Certificate
+      </a>
+    </div>
   </div>
 </div>

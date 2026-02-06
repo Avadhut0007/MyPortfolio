@@ -42,71 +42,262 @@
   border-radius: 20px;
   text-align: center;
   margin-left: 10px;
-  padding: 20px;
+  padding: 30px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, 
               rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.image img {
+.info:hover {
+  transform: translateY(-8px);
+  box-shadow: rgba(50, 50, 93, 0.4) 0px 10px 20px -1px, 
+              rgba(198, 255, 64, 0.2) 0px 4px 12px -1px;
+}
+
+/* Profile Badge - "Available" */
+.profile-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, #c6ff40, #a8e600);
+  border-radius: 20px;
+  padding: 6px 14px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.badge-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: #000;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Enhanced Image Container */
+.image-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.image-glow {
+  position: absolute;
+  inset: -8px;
+  background: linear-gradient(135deg, #c6ff40, #f56e38);
+  border-radius: 20px;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+  filter: blur(15px);
+}
+
+.profile-image {
   height: 250px;
   width: 200px;
   object-fit: cover;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  position: relative;
+  z-index: 1;
 }
 
-.name p {
+.image-container:hover .image-glow {
+  opacity: 0.6;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+.image-container:hover .profile-image {
+  transform: scale(1.05) translateY(-5px);
+  filter: brightness(1.1) drop-shadow(0 10px 25px rgba(198, 255, 64, 0.3));
+}
+
+/* Shine effect on image */
+.image-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 0.4s ease;
+}
+
+.image-container:hover .image-shine {
+  opacity: 0.8;
+  animation: shine 1.5s ease-in-out;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.4; filter: blur(15px); }
+  50% { opacity: 0.8; filter: blur(20px); }
+}
+
+/* Name Styling */
+.name-text {
   font-size: 25px;
   font-weight: 700;
   color: rgb(89, 89, 95);
+  position: relative;
+  display: inline-block;
 }
 
-.degisnation p {
-  font-size: 12px;
+.name-underline {
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #c6ff40, #f56e38);
+  margin: 8px auto 0;
+  transition: width 0.5s ease;
+  border-radius: 2px;
+}
+
+.name:hover .name-underline {
+  width: 100%;
+}
+
+/* Designation with Icon */
+.designation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(198, 255, 64, 0.1), rgba(245, 110, 56, 0.1));
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #313331;
+  color: #666;
   font-weight: 500;
-  margin-top: -10px;
+  transition: all 0.3s ease;
 }
 
-.summery p {
-  font-size: 14px;
-  padding-top: 20px;
+.designation-badge:hover {
+  background: linear-gradient(135deg, rgba(198, 255, 64, 0.2), rgba(245, 110, 56, 0.2));
+  transform: translateY(-2px);
 }
+
+.designation-badge i {
+  color: #c6ff40;
+}
+
+/* Summary Text */
+.summary-text {
+  font-size: 14px;
+  padding: 0;
+  color: #666;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+}
+
+/* Profile Stats Section */
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+  margin-top: 20px;
+  border-top: 2px solid #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.stat-item {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0d0e0d;
+  margin: 0;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #aaa;
+  margin: 5px 0 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 30px;
+  background: #ddd;
+}
+
+/* ============================================= */
+/* ANIMATED GET IN TOUCH BUTTON */
+/* ============================================= */
 
 .get-in-touch {
-  background-color: rgb(202, 198, 198);
-  border-radius: 40px;
-  font-size: 25px;
-  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px 12px 24px;
+  background: rgba(100, 100, 100, 0.5);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: transform 0.2s ease;
-  padding: 10px 20px;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.get-in-touch p {
-  color: white;
+.btn-text {
+  font-weight: 700;
+  color: #fff;
+}
+
+.arrow-badge {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #ffc107, #ffb300);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.4s ease;
 }
 
 .get-in-touch:hover {
-  transform: scale(1.05);
-  background-color: #313536;
+  background: rgba(198, 255, 64, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(198, 255, 64, 0.3);
+  box-shadow: 0 8px 32px rgba(198, 255, 64, 0.2);
+  color: #c6ff40;
 }
 
-.circle {
-  height: 45px;
-  width: 45px;
-  background-color: #d5ff2e;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.get-in-touch:hover .btn-text {
+  color: #c6ff40;
 }
 
-.circle i {
-  transition: transform 0.3s ease;
-}
-
-.circle i:hover {
-  transform: translate(-10px, -10px) rotate(-40deg);
+.get-in-touch:hover .arrow-badge {
+  background: linear-gradient(135deg, #c6ff40, #a8e600);
+  color: #000;
+  box-shadow: 0 0 20px rgba(198, 255, 64, 0.4);
 }
 
 .heading h1 {
@@ -254,5 +445,117 @@ h1:hover::before {
     gap: 10px;
 }
 
+/* ============================================= */
+/* MOBILE RESPONSIVE STYLES */
+/* ============================================= */
+
+@media (max-width: 768px) {
+  .info {
+    padding: 20px;
+    margin-left: 0;
+  }
+
+  .profile-badge {
+    top: 12px;
+    right: 12px;
+    font-size: 10px;
+    padding: 5px 12px;
+  }
+
+  .profile-image {
+    height: 200px;
+    width: 160px;
+  }
+
+  .image-glow {
+    inset: -6px;
+  }
+
+  .name-text {
+    font-size: 22px;
+  }
+
+  .designation-badge {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  .summary-text {
+    font-size: 13px;
+  }
+
+  .profile-stats {
+    padding: 15px 0;
+    margin-top: 15px;
+  }
+
+  .stat-number {
+    font-size: 18px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
+
+  .stat-divider {
+    height: 25px;
+  }
+
+  .get-in-touch {
+    padding: 10px 14px 10px 20px;
+    font-size: 14px;
+    gap: 10px;
+  }
+
+  .arrow-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .info {
+    padding: 18px;
+  }
+
+  .profile-image {
+    height: 180px;
+    width: 140px;
+  }
+
+  .name-text {
+    font-size: 20px;
+  }
+
+  .designation-badge {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+
+  .profile-stats {
+    padding: 12px 0;
+  }
+
+  .stat-number {
+    font-size: 16px;
+  }
+
+  .stat-label {
+    font-size: 9px;
+  }
+
+  .get-in-touch {
+    padding: 9px 12px 9px 18px;
+    font-size: 13px;
+    gap: 8px;
+  }
+
+  .arrow-badge {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+}
 
 /* Responsive adjustments handled automatically with Bootstrap */
