@@ -33,18 +33,19 @@
   background-size: 700px 150px;
   opacity: 0.6;
   animation: twinkle 4s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate, float 6s ease-in-out infinite;
+  will-change: opacity, transform;
 }
 
 @keyframes twinkle {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  25% { opacity: 0.8; transform: scale(1.1); }
-  50% { opacity: 0.6; transform: scale(0.9); }
-  75% { opacity: 0.9; transform: scale(1.05); }
+  0%, 100% { opacity: 0.4; }
+  25% { opacity: 0.8; }
+  50% { opacity: 0.6; }
+  75% { opacity: 0.9; }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-3px) scale(1.02); }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
 }
 
 /* LEFT CARD */
