@@ -124,9 +124,17 @@ export const SKILLS_DATA: Skill[] = [
     description: 'T-SQL, stored procedures, indexing, query optimization',
     category: 'Databases'
   },
-  // Tools & Version Control
   {
     id: 16,
+    name: 'Oracle',
+    icon: 'assets/skills/oracle.png',
+    level: 'Intermediate',
+    description: 'SQL, stored procedures, indexing, query optimization',
+    category: 'Databases'
+  },
+  // Tools & Version Control
+  {
+    id: 17,
     name: 'Git',
     icon: 'assets/skills/Git.png',
     level: 'Advanced',
@@ -134,7 +142,7 @@ export const SKILLS_DATA: Skill[] = [
     category: 'Tools'
   },
   {
-    id: 17,
+    id: 18,
     name: 'GitHub',
     icon: 'assets/skills/GitHub.png',
     level: 'Advanced',
@@ -142,7 +150,7 @@ export const SKILLS_DATA: Skill[] = [
     category: 'Tools'
   },
   {
-    id: 18,
+    id: 19,
     name: 'BitBucket',
     icon: 'assets/skills/BitBucket.png',
     level: 'Intermediate',
@@ -151,7 +159,7 @@ export const SKILLS_DATA: Skill[] = [
   },
   // Testing & API Tools
   {
-    id: 19,
+    id: 21,
     name: 'Postman',
     icon: 'assets/skills/Postman.png',
     level: 'Advanced',
@@ -159,7 +167,7 @@ export const SKILLS_DATA: Skill[] = [
     category: 'Testing & APIs'
   },
   {
-    id: 20,
+    id: 22,
     name: 'Swagger',
     icon: 'assets/skills/Swagger.png',
     level: 'Intermediate',

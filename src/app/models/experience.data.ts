@@ -3,7 +3,7 @@ import { Experience } from './experience.model';
 export const EXPERIENCE_DATA: Experience[] = [
   {
     id: 1,
-    role: 'Java Full-Stack Developer Trainee',
+    role: 'Software Developer Trainee',
     company: 'CARE Analytics and Advisory Pvt. Ltd.',
     duration: 'Jan 2026 – Present',
     location: 'India',
@@ -12,7 +12,7 @@ export const EXPERIENCE_DATA: Experience[] = [
       'Developed REST APIs and integrated frontend with backend services.',
       'Collaborated with senior developers and followed clean architecture.'
     ],
-    technologies: ['Java', 'Spring Boot', 'Angular', 'MySQL']
+    technologies: ['.Net', 'ASP .Net Core Web API', 'Angular', 'Oracle']
   },
   {
     id: 2,
