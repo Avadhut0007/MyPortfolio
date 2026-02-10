@@ -330,6 +330,7 @@ h1:hover::before {
   letter-spacing: 4px;
   text-transform: uppercase;
   cursor: pointer;
+  display: inline-block;
 }
 
 .software-title::before {
@@ -341,12 +342,23 @@ h1:hover::before {
   height: 100%;
   color: white;
   overflow: hidden;
-  white-space: nowrap;
+  /* allow wrapping to match underlying text on small screens */
+  white-space: normal;
+  display: inline-block;
+  font-size: inherit;
+  line-height: inherit;
   border-right: 3px solid white;
   transition: width 1s ease-in-out;
 }
 
 .software-title:hover::before {
+  width: 100%;
+  filter: drop-shadow(0 0 25px #c6ff40);
+}
+
+/* Support touch devices: activate the reveal on focus/active (tap) */
+.software-title:active::before,
+.software-title:focus::before {
   width: 100%;
   filter: drop-shadow(0 0 25px #c6ff40);
 }
