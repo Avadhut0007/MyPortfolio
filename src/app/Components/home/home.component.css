@@ -330,7 +330,7 @@ h1:hover::before {
   letter-spacing: 4px;
   text-transform: uppercase;
   cursor: pointer;
-  display: inline-block;
+  display: block;
 }
 
 .software-title::before {
@@ -342,11 +342,7 @@ h1:hover::before {
   height: 100%;
   color: white;
   overflow: hidden;
-  /* allow wrapping to match underlying text on small screens */
-  white-space: normal;
-  display: inline-block;
-  font-size: inherit;
-  line-height: inherit;
+  white-space: nowrap;
   border-right: 3px solid white;
   transition: width 1s ease-in-out;
 }
@@ -361,6 +357,20 @@ h1:hover::before {
 .software-title:focus::before {
   width: 100%;
   filter: drop-shadow(0 0 25px #c6ff40);
+}
+
+/* Mobile: allow text wrapping on small screens */
+@media (max-width: 768px) {
+  .software-title {
+    display: inline-block;
+  }
+
+  .software-title::before {
+    white-space: normal;
+    display: inline-block;
+    font-size: inherit;
+    line-height: inherit;
+  }
 }
 
 .some-desc {
