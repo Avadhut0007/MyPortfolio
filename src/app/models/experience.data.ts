@@ -3,7 +3,7 @@ import { Experience } from './experience.model';
 export const EXPERIENCE_DATA: Experience[] = [
   {
     id: 1,
-    role: 'Software Developer Trainee',
+    role: 'Software Developer',
     company: 'CARE Analytics and Advisory Pvt. Ltd.',
     duration: 'Jan 2026 – Present',
     location: 'India',
