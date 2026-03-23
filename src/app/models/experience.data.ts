@@ -3,16 +3,16 @@ import { Experience } from './experience.model';
 export const EXPERIENCE_DATA: Experience[] = [
   {
     id: 1,
-    role: 'Software Developer',
+    role: 'Junior Software Developer',
     company: 'CARE Analytics and Advisory Pvt. Ltd.',
     duration: 'Jan 2026 – Present',
     location: 'India',
     description: [
-      'Worked on enterprise-level web applications using .Net Core and Angular.',
-      'Developed REST APIs and integrated frontend with backend services.',
-      'Collaborated with senior developers and followed clean architecture.'
+      'DevelopingandenhancingCRM and Jira automation toolsusing.NET Core,implementingbackendfeatures to streamline business workflows.',
+      'Designing and optimizing Oracle SQL queries, stored procedures, and reports for efficient handling of large-scale operational and financial data.',
+      'Implementingworkflowautomation, RBAC,and resolving production issues to improve system performance, reliability, and scalability.'
     ],
-    technologies: ['.Net', 'ASP .Net Core Web API', 'Angular', 'Oracle']
+    technologies: ['.Net Core', 'ASP .Net Core Web API', 'Angular', 'Oracle 21c', 'Git', 'Jira']
   },
   {
     id: 2,
