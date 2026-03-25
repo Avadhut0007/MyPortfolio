@@ -1,14 +1,45 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, AfterViewInit } from '@angular/core';
 import { CERTIFICATES_DATA, Certification } from './certifications.data';
+import { ScrollAnimationService } from '../../services/scroll-animation.service';
+
+declare var anime: any;
 
 @Component({
   selector: 'app-certifications',
   templateUrl: './certifications.component.html',
   styleUrl: './certifications.component.css'
 })
-export class CertificationsComponent {
+export class CertificationsComponent implements AfterViewInit {
   certifications: Certification[] = CERTIFICATES_DATA;
   selectedCertificate: Certification | null = null;
+
+  constructor(private scrollAnimation: ScrollAnimationService) {}
+
+  ngAfterViewInit(): void {
+    this.animateCertificationsOnScroll();
+  }
+
+  private animateCertificationsOnScroll() {
+    // Animate certification cards with flip effect
+    this.scrollAnimation.observeAndAnimate('.certification-card', (element) => {
+      anime({
+        targets: element,
+        rotateY: [90, 0],
+        translateZ: 0,
+        opacity: [0, 1],
+        duration: 700,
+        easing: 'easeOutQuad'
+      });
+
+      // Add pulse to issuer badge
+      const badge = (element as HTMLElement).querySelector('.issuer-badge');
+      if (badge) {
+        setTimeout(() => {
+          this.scrollAnimation.pulseEffect(badge as HTMLElement, 10);
+        }, 400);
+      }
+    }, 0.25);
+  }
 
   getIssuerClass(issuer: string): string {
     const issuerLower = issuer.toLowerCase();
@@ -25,6 +56,20 @@ export class CertificationsComponent {
     this.selectedCertificate = cert;
     // Prevent body scroll when modal is open
     document.body.style.overflow = 'hidden';
+
+    // Animate modal appearance
+    setTimeout(() => {
+      const modal = document.querySelector('.certificate-modal');
+      if (modal) {
+        anime({
+          targets: modal,
+          scale: [0.8, 1],
+          opacity: [0, 1],
+          duration: 400,
+          easing: 'easeOutQuad'
+        });
+      }
+    }, 100);
   }
 
   /**

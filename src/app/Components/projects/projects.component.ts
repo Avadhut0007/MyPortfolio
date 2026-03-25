@@ -1,13 +1,14 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, AfterViewInit } from '@angular/core';
 import { ProjectsService } from '../../services/projects.service';
 
+declare var anime: any;
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css']
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsComponent implements OnInit, AfterViewInit {
 
   projects: any[] = [];
 
@@ -15,6 +16,11 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProjects();
+  }
+
+  ngAfterViewInit(): void {
+    // Animate project cards on scroll
+    this.animateOnScroll();
   }
 
   getProjects() {
@@ -26,6 +32,28 @@ export class ProjectsComponent implements OnInit {
         console.error(err);
       }
     });
+  }
+
+  private animateOnScroll() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          anime({
+            targets: entry.target,
+            translateY: [30, 0],
+            opacity: [0, 1],
+            duration: 800,
+            easing: 'easeOutQuad'
+          });
+        }
+      });
+    }, { threshold: 0.1 });
+
+    setTimeout(() => {
+      document.querySelectorAll('.project-card').forEach(card => {
+        observer.observe(card);
+      });
+    }, 100);
   }
 
   @HostListener('window:scroll')

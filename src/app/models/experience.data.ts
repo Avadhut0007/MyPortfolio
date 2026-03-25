@@ -8,9 +8,9 @@ export const EXPERIENCE_DATA: Experience[] = [
     duration: 'Jan 2026 – Present',
     location: 'India',
     description: [
-      'DevelopingandenhancingCRM and Jira automation toolsusing.NET Core,implementingbackendfeatures to streamline business workflows.',
+      'Developing and enhancing CRM and Jira automation tools using .NET Core, implementing backend features to streamline business workflows.',
       'Designing and optimizing Oracle SQL queries, stored procedures, and reports for efficient handling of large-scale operational and financial data.',
-      'Implementingworkflowautomation, RBAC,and resolving production issues to improve system performance, reliability, and scalability.'
+      'Implementing work flow automation, RBAC,and resolving production issues to improve system performance, reliability, and scalability.'
     ],
     technologies: ['.Net Core', 'ASP .Net Core Web API', 'Angular', 'Oracle 21c', 'Git', 'Jira']
   },
