@@ -3,6 +3,7 @@ import {
   ElementRef,
   ViewChild,
   AfterViewInit,
+  OnDestroy,
   HostListener
 } from '@angular/core';
 
@@ -11,7 +12,7 @@ import {
   templateUrl: './starfield.component.html',
   styleUrls: ['./starfield.component.css']
 })
-export class StarfieldComponent implements AfterViewInit {
+export class StarfieldComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
   ctx!: CanvasRenderingContext2D;
@@ -25,6 +26,9 @@ export class StarfieldComponent implements AfterViewInit {
   SHOOTING_INTERVAL = 3000; // every 3 seconds
   isMobile = false;
   isTablet = false;
+
+  private animationFrameId = 0;
+  private shootingStarIntervalId = 0;
 
   ngAfterViewInit() {
     // Ensure canvas is rendered before accessing it
@@ -108,7 +112,7 @@ export class StarfieldComponent implements AfterViewInit {
     try {
       const canvas = this.canvasRef?.nativeElement;
       if (!canvas || !this.ctx) {
-        requestAnimationFrame(this.animate);
+        this.animationFrameId = requestAnimationFrame(this.animate);
         return;
       }
 
@@ -117,10 +121,10 @@ export class StarfieldComponent implements AfterViewInit {
       this.drawStars();
       this.drawShootingStars();
 
-      requestAnimationFrame(this.animate);
+      this.animationFrameId = requestAnimationFrame(this.animate);
     } catch (error) {
       console.error('Animation error:', error);
-      requestAnimationFrame(this.animate);
+      this.animationFrameId = requestAnimationFrame(this.animate);
     }
   };
 
@@ -148,7 +152,7 @@ export class StarfieldComponent implements AfterViewInit {
   }
 
   startShootingStars() {
-    setInterval(() => {
+    this.shootingStarIntervalId = window.setInterval(() => {
       this.shootingStars.push({
         x: Math.random() * window.innerWidth,
         y: 0,
@@ -161,8 +165,13 @@ export class StarfieldComponent implements AfterViewInit {
     }, this.SHOOTING_INTERVAL);
   }
 
+  ngOnDestroy() {
+    cancelAnimationFrame(this.animationFrameId);
+    clearInterval(this.shootingStarIntervalId);
+  }
+
   drawShootingStars() {
-    this.shootingStars.forEach((star, index) => {
+    this.shootingStars.forEach(star => {
       // Draw the shooting star trail
       this.ctx.beginPath();
       this.ctx.moveTo(star.x, star.y);
@@ -184,12 +193,12 @@ export class StarfieldComponent implements AfterViewInit {
       // Fade out
       star.opacity -= 0.02;
       star.life--;
-
-      // Remove if off screen or faded out
-      if (star.y > window.innerHeight + 50 || star.x < -50 || star.opacity <= 0 || star.life <= 0) {
-        this.shootingStars.splice(index, 1);
-      }
     });
+
+    // Remove expired stars without mutating the array during iteration
+    this.shootingStars = this.shootingStars.filter(
+      star => star.y <= window.innerHeight + 50 && star.x >= -50 && star.opacity > 0 && star.life > 0
+    );
   }
 
   @HostListener('mousemove', ['$event'])

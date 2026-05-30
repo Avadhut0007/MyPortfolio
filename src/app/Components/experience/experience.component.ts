@@ -34,7 +34,7 @@ export class ExperienceComponent implements OnInit, AfterViewInit {
     this.scrollAnimation.observeAndAnimate('.timeline-item', (element) => {
       anime({
         targets: element,
-        translateX: [(element as HTMLElement).classList.contains('left') ? [-100, 0] : [100, 0]],
+        translateX: (element as HTMLElement).classList.contains('left') ? [-100, 0] : [100, 0],
         opacity: [0, 1],
         duration: 800,
         easing: 'easeOutQuad'

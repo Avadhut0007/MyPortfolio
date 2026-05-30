@@ -15,15 +15,16 @@ export class ScrollAnimationService {
   animateCounter(element: HTMLElement, targetValue: number, duration: number = 2000) {
     const parts = element.textContent?.split('+') || [];
     const suffix = parts[1] ? '+' : '';
-    
+    const counter = { value: 0 };
+
     anime({
-      targets: { value: 0 },
+      targets: counter,
       value: targetValue,
       duration: duration,
       easing: 'easeOutExpo',
       round: 1,
-      update(anim: any) {
-        element.textContent = Math.floor(anim.progress * targetValue) + suffix;
+      update() {
+        element.textContent = Math.round(counter.value) + suffix;
       }
     });
   }

@@ -13,14 +13,7 @@ export class FooterComponent {
   @HostListener('window:scroll')
   onScroll() {
     this.showScrollTop = window.scrollY > 300;
-  }
 
-  scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  @HostListener('window:scroll')
-  revealFooter() {
     const footer = document.querySelector('.reveal');
     if (!footer) return;
 
@@ -30,5 +23,9 @@ export class FooterComponent {
     if (elementTop < windowHeight - 100) {
       footer.classList.add('active');
     }
+  }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

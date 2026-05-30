@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Skill } from '../../models/skill.model';
 import { SkillsService } from '../../services/skills.service';
 import { ScrollAnimationService } from '../../services/scroll-animation.service';
@@ -15,14 +15,20 @@ interface SkillCategory {
   templateUrl: './skills.component.html',
   styleUrl: './skills.component.css'
 })
-export class SkillsComponent implements OnInit, AfterViewInit {
+export class SkillsComponent implements OnInit, AfterViewInit, OnDestroy {
   skills: Skill[] = [];
   skillCategories: SkillCategory[] = [];
+  private cardListeners: { el: Element; type: string; fn: EventListener }[] = [];
 
   constructor(
     private skillsService: SkillsService,
     private scrollAnimation: ScrollAnimationService
   ) {}
+
+  ngOnDestroy() {
+    this.cardListeners.forEach(({ el, type, fn }) => el.removeEventListener(type, fn));
+    this.cardListeners = [];
+  }
 
   ngOnInit(): void {
     this.skillsService.getSkills().subscribe(data => {
@@ -48,26 +54,20 @@ export class SkillsComponent implements OnInit, AfterViewInit {
         easing: 'easeOutQuad'
       });
 
-      // Add hover animations
+      // Add hover animations (tracked for cleanup in ngOnDestroy)
       document.querySelectorAll('.skill-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          anime({
-            targets: card,
-            scale: 1.1,
-            rotateY: 5,
-            duration: 300,
-            easing: 'easeOutQuad'
-          });
-        });
-        card.addEventListener('mouseleave', () => {
-          anime({
-            targets: card,
-            scale: 1,
-            rotateY: 0,
-            duration: 300,
-            easing: 'easeOutQuad'
-          });
-        });
+        const onEnter: EventListener = () => {
+          anime({ targets: card, scale: 1.1, rotateY: 5, duration: 300, easing: 'easeOutQuad' });
+        };
+        const onLeave: EventListener = () => {
+          anime({ targets: card, scale: 1, rotateY: 0, duration: 300, easing: 'easeOutQuad' });
+        };
+        card.addEventListener('mouseenter', onEnter);
+        card.addEventListener('mouseleave', onLeave);
+        this.cardListeners.push(
+          { el: card, type: 'mouseenter', fn: onEnter },
+          { el: card, type: 'mouseleave', fn: onLeave }
+        );
       });
     }, 100);
   }

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { ScrollAnimationService } from '../../services/scroll-animation.service';
 
 declare var anime: any;
@@ -8,13 +8,20 @@ declare var anime: any;
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent implements AfterViewInit, OnDestroy {
+
+  private boxListeners: { el: Element; type: string; fn: EventListener }[] = [];
 
   constructor(private scrollAnimation: ScrollAnimationService) {}
 
   ngAfterViewInit() {
     // Orchestrate reveal animations with staggered timing
     this.animateHomeReveal();
+  }
+
+  ngOnDestroy() {
+    this.boxListeners.forEach(({ el, type, fn }) => el.removeEventListener(type, fn));
+    this.boxListeners = [];
   }
 
   private animateHomeReveal() {
@@ -157,9 +164,9 @@ export class HomeComponent implements AfterViewInit {
       easing: 'easeOutQuad'
     });
 
-    // Add hover effects on boxes
+    // Add hover effects on boxes (tracked for cleanup in ngOnDestroy)
     document.querySelectorAll('.box1').forEach(box => {
-      box.addEventListener('mouseenter', () => {
+      const onEnter: EventListener = () => {
         anime({
           targets: box,
           translateY: -8,
@@ -167,9 +174,8 @@ export class HomeComponent implements AfterViewInit {
           duration: 300,
           easing: 'easeOutQuad'
         });
-      });
-
-      box.addEventListener('mouseleave', () => {
+      };
+      const onLeave: EventListener = () => {
         anime({
           targets: box,
           translateY: 0,
@@ -177,14 +183,21 @@ export class HomeComponent implements AfterViewInit {
           duration: 300,
           easing: 'easeOutQuad'
         });
-      });
+      };
+      box.addEventListener('mouseenter', onEnter);
+      box.addEventListener('mouseleave', onLeave);
+      this.boxListeners.push(
+        { el: box, type: 'mouseenter', fn: onEnter },
+        { el: box, type: 'mouseleave', fn: onLeave }
+      );
     });
   }
 
   private animateProfessionalTitle() {
     const titleElement = document.querySelector('.software-title') as HTMLElement;
+    if (!titleElement) return;
     const fullText = 'Software Developer';
-    
+
     // Clear initial text
     titleElement.textContent = '';
     
