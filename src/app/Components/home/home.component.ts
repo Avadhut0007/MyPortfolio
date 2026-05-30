@@ -11,167 +11,160 @@ declare var anime: any;
 export class HomeComponent implements AfterViewInit, OnDestroy {
 
   private boxListeners: { el: Element; type: string; fn: EventListener }[] = [];
+  private typeTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(private scrollAnimation: ScrollAnimationService) {}
 
   ngAfterViewInit() {
-    // Orchestrate reveal animations with staggered timing
     this.animateHomeReveal();
   }
 
   ngOnDestroy() {
     this.boxListeners.forEach(({ el, type, fn }) => el.removeEventListener(type, fn));
     this.boxListeners = [];
+    if (this.typeTimer) clearTimeout(this.typeTimer);
   }
 
   private animateHomeReveal() {
-    // 1. Animate background elements first (subtle)
-    anime({
-      targets: '.container-fluid::before',
-      opacity: [0, 0.3],
-      duration: 1200,
-      easing: 'easeOutQuad'
-    });
-
-    // 2. Stagger profile card entrance
+    // 1. Profile card entrance
     anime({
       targets: '.profile-card',
-      translateY: [80, 0],
+      translateY: [60, 0],
       opacity: [0, 1],
-      scale: [0.9, 1],
+      scale: [0.97, 1],
       duration: 900,
       delay: 200,
       easing: 'easeOutCubic'
     });
 
-    // 3. Animate profile badge with pulse
+    // 2. Available badge pop-in
     anime({
       targets: '.profile-badge',
       opacity: [0, 1],
-      scale: [0.5, 1],
-      duration: 700,
+      scale: [0.6, 1],
+      duration: 600,
       delay: 600,
       easing: 'easeOutBounce'
     });
 
-    // 4. Animate profile image with advanced glow
+    // 3. Profile image
     anime({
       targets: '.image-container',
       opacity: [0, 1],
+      scale: [0.9, 1],
       duration: 600,
       delay: 700,
-      easing: 'easeOutQuad'
+      easing: 'easeOutCubic'
     });
 
-    // Continuous glow effect on image
+    // Pulsing glow on image
     anime({
       targets: '.profile-image',
       boxShadow: [
         '0 0 0 rgba(198, 255, 64, 0)',
-        '0 0 25px rgba(198, 255, 64, 0.6)',
-        '0 0 10px rgba(198, 255, 64, 0.3)'
+        '0 0 28px rgba(198, 255, 64, 0.55)',
+        '0 0 12px rgba(198, 255, 64, 0.25)'
       ],
-      duration: 2500,
+      duration: 2800,
       loop: true,
       easing: 'easeInOutQuad'
     });
 
-    // 5. Animate name section
+    // 4. Name
     anime({
       targets: '.name-text',
-      translateY: [30, 0],
+      translateY: [24, 0],
       opacity: [0, 1],
-      duration: 600,
-      delay: 1000,
+      duration: 550,
+      delay: 950,
       easing: 'easeOutQuad'
     });
 
-    // 6. Animate underline with draw effect
+    // 5. Underline draw
     anime({
       targets: '.name-underline',
-      width: ['0%', '100%'],
+      width: ['0%', '60%'],
       opacity: [0, 1],
-      duration: 600,
-      delay: 1100,
+      duration: 550,
+      delay: 1050,
       easing: 'easeOutQuad'
     });
 
-    // 7. Animate designation badge
+    // 6. Role badge
     anime({
       targets: '.designation-badge',
-      translateY: [20, 0],
+      translateY: [16, 0],
       opacity: [0, 1],
-      duration: 500,
-      delay: 1200,
+      duration: 480,
+      delay: 1150,
       easing: 'easeOutQuad'
     });
 
-    // 8. Animate summary text
+    // 7. Bio
     anime({
       targets: '.summary-text',
-      translateY: [20, 0],
+      translateY: [16, 0],
       opacity: [0, 1],
-      duration: 600,
-      delay: 1350,
+      duration: 550,
+      delay: 1280,
       easing: 'easeOutQuad'
     });
 
-    // 9. Animate stat items with stagger
+    // 8. Stats stagger
     anime({
       targets: '.stat-item',
-      translateY: [40, 0],
-      opacity: [0, 1],
-      duration: 600,
-      delay: anime.stagger(150, { start: 1450 }),
-      easing: 'easeOutQuad'
-    });
-
-    // 10. Animate stat numbers with counter effect
-    setTimeout(() => {
-      this.animateStatCounters();
-    }, 1600);
-
-    // 11. Animate CTA button
-    anime({
-      targets: '.get-in-touch',
-      translateY: [50, 0],
-      opacity: [0, 1],
-      duration: 700,
-      delay: 1800,
-      easing: 'easeOutQuad'
-    });
-
-    // 12. Animate main heading with professional title reveal
-    this.animateProfessionalTitle();
-
-    // 13. Animate description text
-    anime({
-      targets: '.some-desc p',
       translateY: [30, 0],
       opacity: [0, 1],
-      duration: 700,
-      delay: 2000,
+      duration: 550,
+      delay: anime.stagger(130, { start: 1380 }),
       easing: 'easeOutQuad'
     });
 
-    // 14. Animate feature boxes with stagger
+    // Counter animation for stat numbers
+    this.typeTimer = setTimeout(() => this.animateStatCounters(), 1500);
+
+    // 9. CTA
+    anime({
+      targets: '.get-in-touch',
+      translateY: [40, 0],
+      opacity: [0, 1],
+      duration: 650,
+      delay: 1700,
+      easing: 'easeOutQuad'
+    });
+
+    // 10. Typed role title (right column)
+    this.animateProfessionalTitle();
+
+    // 11. Description
+    anime({
+      targets: '.some-desc p',
+      translateY: [24, 0],
+      opacity: [0, 1],
+      duration: 650,
+      delay: 1950,
+      easing: 'easeOutQuad'
+    });
+
+    // 12. Tech chips stagger from right
     anime({
       targets: '.box1',
-      translateX: [100, 0],
+      translateX: [60, 0],
       opacity: [0, 1],
-      duration: 700,
-      delay: anime.stagger(200, { start: 2100 }),
+      duration: 600,
+      delay: anime.stagger(80, { start: 2100 }),
       easing: 'easeOutQuad'
     });
 
-    // Add hover effects on boxes (tracked for cleanup in ngOnDestroy)
+    // Chip hover effects (tracked for ngOnDestroy cleanup)
     document.querySelectorAll('.box1').forEach(box => {
       const onEnter: EventListener = () => {
         anime({
           targets: box,
-          translateY: -8,
-          boxShadow: '0 10px 30px rgba(198, 255, 64, 0.3)',
-          duration: 300,
+          translateY: -5,
+          boxShadow: '0 8px 24px rgba(198, 255, 64, 0.2)',
+          borderColor: 'rgba(198, 255, 64, 0.35)',
+          duration: 250,
           easing: 'easeOutQuad'
         });
       };
@@ -179,8 +172,9 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         anime({
           targets: box,
           translateY: 0,
-          boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
-          duration: 300,
+          boxShadow: '0 0 0 rgba(198, 255, 64, 0)',
+          borderColor: 'rgba(255, 255, 255, 0.09)',
+          duration: 250,
           easing: 'easeOutQuad'
         });
       };
@@ -193,77 +187,73 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  // Cycles through developer roles with a typing + erasing effect
   private animateProfessionalTitle() {
-    const titleElement = document.querySelector('.software-title') as HTMLElement;
-    if (!titleElement) return;
-    const fullText = 'Software Developer';
+    const titleEl = document.querySelector('.software-title') as HTMLElement;
+    if (!titleEl) return;
 
-    // Clear initial text
-    titleElement.textContent = '';
-    
-    let currentText = '';
-    let charIndex = 0;
+    const roles = [
+      'Software Developer',
+      '.NET Developer',
+      'Full-Stack Engineer',
+      'Angular Developer',
+    ];
+    let roleIndex = 0;
 
-    // Typing animation with staggered character reveals
-    const typeCharacter = () => {
-      if (charIndex < fullText.length) {
-        currentText += fullText[charIndex];
-        titleElement.textContent = currentText;
-        
-        // Create letter-by-letter fade-in effect
-        anime({
-          targets: titleElement,
-          opacity: [0, 1],
-          duration: 80,
-          easing: 'easeInOutQuad'
-        });
-        
-        charIndex++;
-        setTimeout(typeCharacter, 70); // Smooth typing speed
-      } else {
-        // After typing, add subtle glow animation
-        setTimeout(() => {
-          this.addTitleGlowEffect();
-        }, 300);
-      }
+    const typeRole = (text: string, onDone: () => void) => {
+      titleEl.textContent = '';
+      anime({ targets: titleEl, opacity: [0, 1], duration: 200, easing: 'easeOutQuad' });
+      let i = 0;
+      const tick = () => {
+        if (i < text.length) {
+          titleEl.textContent += text[i++];
+          this.typeTimer = setTimeout(tick, 65);
+        } else {
+          this.typeTimer = setTimeout(onDone, 2200);
+        }
+      };
+      tick();
     };
 
-    // Start typing after heading animation
-    setTimeout(typeCharacter, 1400);
-  }
+    const eraseRole = (onDone: () => void) => {
+      let text = titleEl.textContent ?? '';
+      const tick = () => {
+        if (text.length > 0) {
+          text = text.slice(0, -1);
+          titleEl.textContent = text;
+          this.typeTimer = setTimeout(tick, 35);
+        } else {
+          this.typeTimer = setTimeout(onDone, 250);
+        }
+      };
+      tick();
+    };
 
-  private addTitleGlowEffect() {
-    anime({
-      targets: '.software-title',
-      textShadow: [
-        '0 0 20px rgba(198, 255, 64, 0)',
-        '0 0 30px rgba(198, 255, 64, 0.6)',
-        '0 0 20px rgba(198, 255, 64, 0.3)'
-      ],
-      duration: 2000,
-      loop: true,
-      easing: 'easeInOutQuad'
-    });
+    const cycle = () => {
+      typeRole(roles[roleIndex], () => {
+        eraseRole(() => {
+          roleIndex = (roleIndex + 1) % roles.length;
+          cycle();
+        });
+      });
+    };
+
+    this.typeTimer = setTimeout(cycle, 1400);
   }
 
   private animateStatCounters() {
-    // Animate stat numbers with counter effect
-    const statNumbers = document.querySelectorAll('.stat-number');
-    
-    statNumbers.forEach((stat, index) => {
+    document.querySelectorAll('.stat-number').forEach((stat, index) => {
       const text = (stat as HTMLElement).textContent || '';
       const numberStr = text.match(/\d+/)?.[0] || '0';
-      const targetNumber = parseInt(numberStr);
+      const target = parseInt(numberStr);
       const suffix = text.includes('+') ? '+' : '';
-
-      // Create counter object
       const counter = { value: 0 };
 
       anime({
         targets: counter,
-        value: [0, targetNumber],
+        value: [0, target],
         duration: 1200,
-        delay: 200 + (index * 150),
+        delay: 180 + index * 130,
         easing: 'easeOutQuad',
         round: 1,
         update() {
