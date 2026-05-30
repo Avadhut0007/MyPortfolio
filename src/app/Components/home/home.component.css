@@ -569,8 +569,21 @@
 
 @media (max-width: 991px) {
   .hero-wrap { padding: 20px 24px 40px; }
-  .hero-right { padding-left: 0; margin-top: 16px; }
-  .profile-card { max-width: 100%; }
+
+  /* Remove forced 100vh + vertical centering when columns are stacked */
+  .hero-wrap .row {
+    min-height: auto !important;
+    align-items: flex-start !important;
+  }
+
+  .hero-right { padding-left: 0; margin-top: 24px; }
+
+  /* Cap card width and center it — avoids ugly edge-to-edge stretch on tablets */
+  .profile-card { max-width: 420px; }
+
+  /* CTA button full-width so it doesn't float small inside the wider card */
+  .get-in-touch { width: 100%; justify-content: center; }
+
   .software-title,
   .typing-cursor { font-size: clamp(2rem, 8vw, 3.2rem); }
   .hero-title-block { min-height: 60px; }
@@ -578,6 +591,13 @@
 
 @media (max-width: 576px) {
   .hero-wrap { padding: 16px 16px 40px; }
+
+  /* Card goes full-width on small phones */
+  .profile-card { max-width: 100%; }
+
+  /* Shrink monospace greeting so it doesn't overflow narrow screens */
+  .code-greeting { font-size: 11px; }
+
   .hero-action-row { flex-direction: column; align-items: stretch; }
   .hero-btn-primary,
   .hero-btn-ghost { justify-content: center; }
@@ -586,4 +606,13 @@
   .typing-cursor { font-size: 2rem; letter-spacing: -1px; }
   .hero-title-block { min-height: 52px; }
   .box1 { font-size: 12px; padding: 7px 13px; }
+  .summary-text { font-size: 12px; }
+  .hero-social-row { flex-wrap: wrap; gap: 10px; }
+}
+
+/* Very small phones (≤400px) — prevent stat numbers from cramping */
+@media (max-width: 400px) {
+  .stat-number { font-size: 20px; }
+  .stat-label { font-size: 9px; }
+  .profile-stats { padding: 14px 4px; }
 }
